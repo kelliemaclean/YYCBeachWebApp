@@ -265,7 +265,8 @@ def generate_schedule_with_bye(num_teams =int, num_weeks=int, num_courts=int):
             Courts.append(courts)
         
         #rotate bye groups for matches
-        groups.append(groups.pop(0))
+        #groups.append(groups.pop(0))
+        groups = [groups[-1]] + groups[:-1]
 
     #create dataframe for schedule
     Courts = pd.DataFrame(Courts)
@@ -297,7 +298,12 @@ def main(num_teams = int, num_weeks = int, num_courts = int, bye = str):
                                                             num_weeks = num_weeks, 
                                                             num_courts = num_courts
                                                         )
-
+        for col in schedule.columns: 
+            schedule[col] = schedule[col].str.replace("Team", "")
+            schedule[col] = schedule[col].str.replace("['", "")
+            schedule[col] = schedule[col].str.replace("']", "")
+            schedule[col] = schedule[col].str.replace("s.", "")
+            schedule[col] = schedule[col].str.replace("'", "")
         return schedule
 
     elif bye == 'False':
