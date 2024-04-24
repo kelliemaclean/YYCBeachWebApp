@@ -1,4 +1,4 @@
 # YYCBeachWebApp
 Django Web application for beach volleyball schedule
 
-![text]("YYCBeachWebApp/generator page.png" "home")
+![text]("generator page.png" "home")
