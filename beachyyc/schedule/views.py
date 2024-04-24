@@ -307,10 +307,16 @@ def main(num_teams = int, num_weeks = int, num_courts = int, bye = str):
         return schedule
 
     elif bye == 'False':
-       schedule = generate_schedule_without_bye(num_teams=num_teams, 
+        schedule = generate_schedule_without_bye(num_teams=num_teams, 
                                                 num_weeks=num_weeks, 
                                                 num_courts=num_courts)
-       return schedule
+        for col in schedule.columns: 
+            schedule[col] = schedule[col].str.replace("Team", "")
+            schedule[col] = schedule[col].str.replace("['", "")
+            schedule[col] = schedule[col].str.replace("']", "")
+            schedule[col] = schedule[col].str.replace("s.", "")
+            schedule[col] = schedule[col].str.replace("'", "")
+        return schedule
     
     else:
         return print('error in inputs')
